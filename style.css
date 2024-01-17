@@ -1,0 +1,11 @@
+td {
+  text-align: center;
+}
+td, th {
+  border: 3px solid blue;
+  text-align: center;
+}
+body {
+  font-family: sans-serif;
+  font-size: 14px;
+}
