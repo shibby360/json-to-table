@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title></title>
+    <link href="/static/style.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <table id='taable'>
+
+    </table>
+    <h1>Find cell</h1>
+    <select id="cols"></select>
+    <select id="ros"></select>
+    <button onclick="search()">Search</button>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script>
+      try {
+        var tble = {{ cntnt|safe }}
+        var taable = $('#taable')
+        var columns = Object.keys(tble)
+        var rows = Object.keys(tble[columns[0]])
+        var ro2ro = {}
+        for(var i in rows) {
+          ro2ro[rows[i]] = rows[i]
+          $('#ros').append($(`<option value=${rows[i]}>${rows[i]}</option>`))
+        }
+        var jts = JSON.stringify
+        tble['Rows(below) Columns>'] = ro2ro
+        columns.unshift('Rows(below) Columns>')
+        var clmrw = $(`<tr></tr>`)
+        for(var i in columns) {
+          clmrw.append($(`<th>${columns[i]}</th>`))
+          if(columns[i] !== 'Rows(below) Columns>') {
+            $('#cols').append($(`<option value=${columns[i]}>${columns[i]}</option>`))
+          }
+        }
+        taable.append(clmrw)
+        for(var i in rows) {
+          var roro = $(`<tr>${rows[i]}</tr>`)
+          for(var j in columns) {
+            var td = $(`<td id="${tble[columns[j]][rows[i]]}--${rows[i]}--${columns[j]}">${tble[columns[j]][rows[i]]}</td>`)
+            roro.append(td)
+          }
+          taable.append(roro)
+        }
+        function search() {
+          $('td').css({'border-color':'blue', 'background-color':'white'})
+          $('#' + tble[$('#cols').val()][$('#ros').val()] + '--' + $('#ros').val() + '--' + $('#cols').val()).css({'border-color':'red', 'background-color':'yellow'})
+          $('#' + tble[$('#cols').val()][$('#ros').val()] + '--' + $('#ros').val() + '--' + $('#cols').val())[0].scrollIntoView({behavior:'smooth'})
+        }
+      } catch(error) {
+        alert(error)
+      }
+    </script>
+  </body>
