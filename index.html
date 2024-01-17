@@ -15,7 +15,7 @@
       try {
         var urlParams = new URLSearchParams(window.location.search);
         var tble = JSON.parse(urlParams.get('data'))
-        if(tble.no === 'data' && tble.given === 'here') {
+        if(!!tble) {
           $(document.body).append($('<p>You don\'t seem to have any data.</p>'))
           $(document.body).append($(`<button onclick='window.location="/editor"'>Go to editor</button>`))
         }
