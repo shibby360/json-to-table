@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title></title>
-    <link href="/static/style.css" rel="stylesheet" type="text/css">
+    <link href="/style.css" rel="stylesheet" type="text/css">
     <style>
       #JSON {
         width: 200px;
@@ -20,7 +20,7 @@
       <option value="rowcol">Rows and Columns</option>
     </select>
     <button onclick="goo()">JSON -> Table!</button>
-    <button onclick="window.location = '/rce.html'">Go to row-column JSON editor</button>
+    <button onclick="window.location = 'rce.html'">Go to row-column JSON editor</button>
     <script>
       function goo() {
         window.location = '/?data=' + $('#JSON').val() + '&type=' + $('#type').val()

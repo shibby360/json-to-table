@@ -17,7 +17,7 @@
         var tble = JSON.parse(urlParams.get('data'))
         if(location.href.indexOf('?data=') == -1) {
           $(document.body).append($('<p>You don\'t seem to have any data.</p>'))
-          $(document.body).append($(`<button onclick='window.location="/editor.html"'>Go to editor</button>`))
+          $(document.body).append($(`<button onclick='window.location="editor.html"'>Go to editor</button>`))
         }
         var taable = $('#taable')
         for(var i in tble) {

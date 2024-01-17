@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title></title>
-    <link href="/static/style.css" rel="stylesheet" type="text/css">
+    <link href="/style.css" rel="stylesheet" type="text/css">
     <style>
     </style>
   </head>
@@ -25,7 +25,7 @@
         $('#JSON').text(JSON.stringify(data))
       }
       function goo() {
-        window.location = '/rowcol.html?data=' + $('#JSON').text()
+        window.location = 'rowcol.html?data=' + $('#JSON').text()
       }
       function addcolfunc() {
         var colname = prompt('Column name?: ')
