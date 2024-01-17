@@ -1,40 +1,15 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title></title>
-    <link href="/style.css" rel="stylesheet" type="text/css">
-  </head>
-  <body>
-    <table id='taable'>
-
-    </table>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script>
-      try {
-        var urlParams = new URLSearchParams(window.location.search);
-        var tble = JSON.parse(urlParams.get('data'))
-        if(location.href.indexOf('?data=') == -1) {
-          $(document.body).append($('<p>You don\'t seem to have any data.</p>'))
-          $(document.body).append($(`<button onclick='window.location="editor.html"'>Go to editor</button>`))
-        }
-        var taable = $('#taable')
-        for(var i in tble) {
-          var ro = $('<tr></tr>')
-          var ktd = $(`<td>${i}</td>`)
-          if(typeof tble[i] === 'object') {
-            var vtd = $(`<td>${JSON.stringify(tble[i])}</td>`)
-          } else {
-            var vtd = $(`<td>${tble[i]}</td>`)
-          }
-          ro.append(ktd)
-          ro.append(vtd)
-          taable.append(ro)
-        }
-      } catch(error) {
-        alert(error)
-        throw(error)
-      }
-    </script>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Loading...</h1>
+  <script>
+    window.location = 'norm.html'
+  </script>
+</body>
+</html>
