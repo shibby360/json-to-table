@@ -14,28 +14,60 @@
     <button onclick="sendr('addrow')">Add row</button>
     <button onclick="sendr('remcol')">Remove column</button>
     <button onclick="sendr('remrow')">Remove row</button>
-    <button onclick="setsn('setter')">Set value</button>
+    <button onclick="sendr('setter')">Set value</button>
     <button onclick="defval = prompt('Value?: ')">Set default value</button>
     <br>
     <button onclick="goo()">JSON -> Table!</button>
     <script>
       var defval = null
+      var data = {}
+      function setdata() {
+        $('#JSON').text(JSON.stringify(data))
+      }
       function goo() {
-        window.location = '/?data=' + $('#JSON').text() + '&type=rowcol'
+        window.location = '/rowcol.html?data=' + $('#JSON').text()
+      }
+      function addcolfunc() {
+        var colname = prompt('Column name?: ')
+        if(data == {}) {
+          data[colname] = defval
+        } else {
+          var firstcol = Object.keys(data)[0]
+          if(data[firstcol] == defval) {
+            data[colname] = defval
+          } else {
+            var rows = Object.keys(data[firstcol])
+            data[colname] = {}
+            for(var i of rows) {
+              data[colname][i] = defval
+            }
+          }
+        }
+      }
+      function addrowfunc() {
+        var rowname = prompt('Row name?: ')
+        var colnames = Object.keys(data)
+        for(var i of colnames) {
+          if(data[i] == defval) {
+            data[i] = {}
+          }
+          data[i][rowname] = defval
+        }
+      }
+      function remcolfunc() {
+        delete data[prompt('Colunm name?: ')]
+      }
+      function remrowfunc() {
+        for(var i of Object.keys(data)) {
+          delete data[i][prompt('Row name?: ')]
+        }
+      }
+      function setterfunc() {
+        data[prompt('Column name?: ')][prompt('Row name?: ')] = prompt('Value?: ')
       }
       function sendr(mode) {
-        fetch(`/${mode}?dict=${$('#JSON').text()}&what=${prompt('Name?: ')}`).then((r) => {
-          r.text().then((t) => {
-            $('#JSON').text(t.replace('null', defval))
-          })
-        })
-      }
-      function setsn() {
-        fetch(`/setter?dict=${$('#JSON').text()}&ro=${prompt('Row?:')}&col=${prompt('Column?: ')}&val=${prompt('Value?: ')}`).then((r) => {
-          r.text().then((t) => {
-            $('#JSON').text(t.replace('null', defval))
-          })
-        })
+        window[mode+'func']()
+        setdata(data)
       }
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title></title>
-    <link href="/static/style.css" rel="stylesheet" type="text/css">
+    <link href="/style.css" rel="stylesheet" type="text/css">
   </head>
   <body>
     <table id='taable'>
@@ -21,7 +21,7 @@
         var tble = JSON.parse(urlParams.get('data'))
         if(location.href.indexOf('?data=') == -1) {
           $(document.body).append($('<p>You don\'t seem to have any data.</p>'))
-          $(document.body).append($(`<button onclick='window.location="/editor"'>Go to editor</button>`))
+          $(document.body).append($(`<button onclick='window.location="/rce.html"'>Go to editor</button>`))
         }
         var taable = $('#taable')
         var columns = Object.keys(tble)
