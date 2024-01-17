@@ -17,7 +17,12 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script>
       try {
-        var tble = {{ cntnt|safe }}
+        var urlParams = new URLSearchParams(window.location.search);
+        var tble = JSON.parse(urlParams.get('data'))
+        if(location.href.indexOf('?data=') == -1) {
+          $(document.body).append($('<p>You don\'t seem to have any data.</p>'))
+          $(document.body).append($(`<button onclick='window.location="/editor"'>Go to editor</button>`))
+        }
         var taable = $('#taable')
         var columns = Object.keys(tble)
         var rows = Object.keys(tble[columns[0]])
