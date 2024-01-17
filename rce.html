@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title></title>
+    <link href="/static/style.css" rel="stylesheet" type="text/css">
+    <style>
+    </style>
+  </head>
+  <body>
+    <p id="JSON">{}</p>
+    <button onclick="sendr('addcol')">Add column</button>
+    <button onclick="sendr('addrow')">Add row</button>
+    <button onclick="sendr('remcol')">Remove column</button>
+    <button onclick="sendr('remrow')">Remove row</button>
+    <button onclick="setsn('setter')">Set value</button>
+    <button onclick="defval = prompt('Value?: ')">Set default value</button>
+    <br>
+    <button onclick="goo()">JSON -> Table!</button>
+    <script>
+      var defval = null
+      function goo() {
+        window.location = '/?data=' + $('#JSON').text() + '&type=rowcol'
+      }
+      function sendr(mode) {
+        fetch(`/${mode}?dict=${$('#JSON').text()}&what=${prompt('Name?: ')}`).then((r) => {
+          r.text().then((t) => {
+            $('#JSON').text(t.replace('null', defval))
+          })
+        })
+      }
+      function setsn() {
+        fetch(`/setter?dict=${$('#JSON').text()}&ro=${prompt('Row?:')}&col=${prompt('Column?: ')}&val=${prompt('Value?: ')}`).then((r) => {
+          r.text().then((t) => {
+            $('#JSON').text(t.replace('null', defval))
+          })
+        })
+      }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  </body>
+</html>
